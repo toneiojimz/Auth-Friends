@@ -1,44 +1,66 @@
-mport React, { useState } from 'react';
+import React from 'react';
 import { axiosWithAuth } from '../path/to/module';
 
-const Login = (props) => {
- const [credentials, setCredentials] = useState({});
 
-  const login = e => {
-    e.preventDefault();
-    axiosWithAuth().post('login/endpoint', credentials)
-      .then(res => {
-        localStorage.setItem('token', res.data.token);
-        this.props.history.push('/');
-      })
-  }
+class Login extends React.Component {
 
-  const handleChange = e => {
-      setCredentials: {
-        ...credentials,
-        [e.target.name]: e.target.value,
-      }
-  }
+    state= {
+        credentials: {
+            username: '',
+            password: ''
+        }, 
+        isFetching: false
+    };
 
+
+  handleChange = e => {
+     this.setState({
+         credentials:{
+             ...this.state.credentials,
+             [e.target.name]: e.target.value
+         }
+     });
+  };
+
+  login = e => {
+      e.preventDefault();
+      this.setState({
+          isFetching: true
+      });
+
+      axiosWithAuth()
+        .post('/login', this.state.credentials)
+        .then(res => {
+            localStorage.setItem('token', res.data.payload);
+            this.props.history.push('/protected');
+        })
+        .catch(err => console.log(err));
+  };
+    
+    render(){
     return (
       <div>
         <form onSubmit={this.login}>
           <input
             type="text"
             name="username"
-            value={credentials.username}
+            placeholder= "username"
+            value={this.state.credentials.username}
             onChange={this.handleChange}
           />
           <input
             type="password"
             name="password"
+            placeholder="password"
             value={credentials.password}
             onChange={this.handleChange}
           />
           <button>Log in</button>
+          {this.state.isFetching && 'friending now'}
         </form>
       </div>
     )
+    }
 }
 
 export default Login;
