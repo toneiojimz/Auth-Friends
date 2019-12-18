@@ -1,12 +1,12 @@
-import React,{useState} from 'react';
+import React from 'react';
 
-const Friend = (fern) => {
+const Friend = (props) => {
     
     return(
         <div>
-            <p> Name: {fern.name}</p>
-            <p> Age: {fern.age}</p>
-            <p> Email: {fern.email}</p>
+            <p> Name: {props.name}</p>
+            <p> Age: {props.age}</p>
+            <p> Email: {props.email}</p>
         </div>
         )
 }

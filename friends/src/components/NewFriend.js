@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 
 const NewFriend = props => {
-    const [friend, setFriend] = useState({ name: '', age:'', email:''})
+    const [friend, setFriend] = useState({ name: '', age:'', email:''});
 
    
 
@@ -22,10 +22,11 @@ const NewFriend = props => {
     }
 
     return (
-        <div>
-            <h1>Add New Friend</h1>
-            <div>
-            <form class='columns' onSubmit={handleSubmit}>
+        <div className='column'>
+            
+            <h1 className='label is-large'>Add New Friend</h1>
+           
+            <form  onSubmit={handleSubmit}>
                 <input className='column '
                     type='text'
                     name='name'
@@ -47,9 +48,9 @@ const NewFriend = props => {
                     value={friend.email}
                     placeholder='email'
                     />
-                    <button className='button is-success' type='submit'> Get Friend-ly!</button>
+                    <button className='button is-success is-loading' 
+                    type='submit'> Get Friend-ly!</button>
             </form>
-            </div>
         </div>
     );
 };

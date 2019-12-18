@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import bulma from 'bulma';
+
 import axiosWithAuth  from '../utils/axiosAuth';
 
 
