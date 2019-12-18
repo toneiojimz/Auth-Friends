@@ -1,9 +1,10 @@
 import React from 'react';
+import bulma from 'bulma';
 
-const Friend = (props) => {
+const Friend = props => {
     
     return(
-        <div>
+        <div className='column is-one-third'>
             <p> Name: {props.name}</p>
             <p> Age: {props.age}</p>
             <p> Email: {props.email}</p>

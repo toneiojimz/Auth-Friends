@@ -11,7 +11,7 @@ const NewFriend = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.makeFriend(friend);
+        props.addFriend(friend);
         setFriend({ name: '', age: '', email: ''});
 
     }
@@ -22,7 +22,7 @@ const NewFriend = props => {
     }
 
     return (
-        <div className='column'>
+        <div className='column is-centered'>
             
             <h1 className='label is-large'>Add New Friend</h1>
            
@@ -48,7 +48,7 @@ const NewFriend = props => {
                     value={friend.email}
                     placeholder='email'
                     />
-                    <button className='button is-success is-loading' 
+                    <button className='button is-success ' 
                     type='submit'> Get Friend-ly!</button>
             </form>
         </div>

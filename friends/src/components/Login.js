@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-import axiosWithAuth  from '../utils/axiosAuth';
+import bulma from 'bulma';
+import axiosWithAuth  from '../utils/axiosWithAuth';
 
 
 const Login = (props) => {
@@ -9,17 +9,11 @@ const Login = (props) => {
     const [logged, setLogged]= useState(false);
 
 
-  const handleChange = e => {
-
-        setCredential({
-            ...credential, 
-            [e.target.name]: e.target.value
-        });
-  };
+ 
 
   const login = e => {
       e.preventDefault();
-      
+      setLogged(true);
 
       axiosWithAuth()
         .post('/login', credential)
@@ -30,6 +24,13 @@ const Login = (props) => {
         })
         .catch(err => console.log(err));
   };
+
+  const handleChange = e => {
+    setCredential({
+        ...credential, 
+        [e.target.name]: e.target.value
+    });
+};
     
     
     return (
