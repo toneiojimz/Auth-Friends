@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Friend from './Friend';
 import NewFriend from './NewFriend';
+import bulma from 'bulma';
 
 
 const FriendsList = props => {
@@ -32,12 +33,13 @@ const FriendsList = props => {
 
     
 
-
+    console.log(friends);
     return (
         <div>
             <NewFriend addFriend={addFriend}/>
-            <h2>....Friends....</h2>
-            <div>
+            <h1 className='label is-big'>....Friends....</h1>
+            <div className='columns'>
+            
                 {loading && <p>Populating...</p>}
                 {friends.map(friend => {
                     return (<Friend key={friend.id} friend={friend} />)})}
