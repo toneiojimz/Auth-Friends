@@ -1,21 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
+import Login from './components/Login';
+import FriendList from './components/FriendList';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/public">Public Page</Link>
-        </li>
-        <li>
-          <Link to="/protected">Protected Page</Link>
-        </li>
-      </ul>
-      <Route path="/public" component={Public} />
-      <Route path="/login" component={Login} />
-    </div>
+    <Router>
+      <div>
+          <div class='navbar is-one-third is-3rem'>
+            <Link class='column  is-one-fourth' to='/login'>Login</Link>
+            <Link class='column  is-one-fourth' to='/protected'>Friends</Link>
+            </div>
+        <Switch>
+          <PrivateRoute path='/friends' component={FriendList}/>
+          <Route path='/login' component={Login}/>
+          <Route component={Login}/>
+        </Switch>
+      </div>
+    </Router>
+    
   );
 }
  export default App;

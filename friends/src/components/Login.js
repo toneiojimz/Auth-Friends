@@ -1,66 +1,60 @@
-import React from 'react';
-import { axiosWithAuth } from '../path/to/module';
+import React, {useState} from 'react';
+import bulma from 'bulma';
+import axiosWithAuth  from '../utils/axiosAuth';
 
 
-class Login extends React.Component {
+const Login = (props) => {
 
-    state= {
-        credentials: {
-            username: '',
-            password: ''
-        }, 
-        isFetching: false
-    };
+    const [credential, setCredential]= useState({ username: 'Lambda School', password: 'i<3Lambd4'});
+    const [logged, setLogged]= useState(false);
 
 
-  handleChange = e => {
-     this.setState({
-         credentials:{
-             ...this.state.credentials,
-             [e.target.name]: e.target.value
-         }
-     });
+  const handleChange = e => {
+
+        setCredential({
+            ...credential, 
+            [e.target.name]: e.target.value
+        });
   };
 
-  login = e => {
+  const login = e => {
       e.preventDefault();
-      this.setState({
-          isFetching: true
-      });
+      
 
       axiosWithAuth()
-        .post('/login', this.state.credentials)
+        .post('/login', credential)
         .then(res => {
             localStorage.setItem('token', res.data.payload);
-            this.props.history.push('/protected');
+            setLogged(false);
+            props.history.push('/friends');
         })
         .catch(err => console.log(err));
   };
     
-    render(){
+    
     return (
-      <div>
-        <form onSubmit={this.login}>
-          <input
+      <div className='field '>
+          {logged && <p>Fetching Friends</p>}
+        <form className='column is-half is-centered'   onSubmit={login}>
+          <input className='input is-focused is-one-fourth is-centered '
             type="text"
             name="username"
             placeholder= "username"
-            value={this.state.credentials.username}
-            onChange={this.handleChange}
+            value={credential.username}
+            onChange={handleChange}
           />
-          <input
+          <input className='input is-focused is-one-fourth is-centered '
             type="password"
             name="password"
             placeholder="password"
-            value={credentials.password}
-            onChange={this.handleChange}
+            value={credential.password}
+            onChange={handleChange}
           />
-          <button>Log in</button>
-          {this.state.isFetching && 'friending now'}
+          <button className='button is-success is-one-fourth'>Log in</button>
         </form>
       </div>
     )
-    }
+    
 }
 
 export default Login;
